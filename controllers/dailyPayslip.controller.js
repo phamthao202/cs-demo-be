@@ -126,18 +126,18 @@ dailyPayslipController.createOrEditPayslip = catchAsync(async (req, res, next) =
 
 dailyPayslipController.getSinglePayslipByDate = catchAsync(
   async (req, res, next) => {
-    let dateOfPayslip = req.body.dateOfPayslip;
-    let staffId = req.body.staffId;
+    let date= req.body.date;
+    let staff_id = req.body.staff_id;
     let targetPayslip = await DailyPayslip.find({
-      staff_id: staffId,
-      date: dateOfPayslip,
+      staff_id: staff_id,
+      date: date,
     });
     if (!targetPayslip) {
       return next(
         new AppError(
           404,
           "Payslip on that date not found",
-          "Get Payslip b]By Date Error"
+          "Get Payslip By Date Error"
         )
       );
     }

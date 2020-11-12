@@ -27,9 +27,9 @@ router.delete(
 );
 // get one item
 router.get(
-  "/:id",
+  "/:title",
   authMiddleware.loginRequired,
   authMiddleware.isManagerOrAdmin,
-  menusController.getSingleItem
+  menusController.getMenuByTitle
 );
 module.exports = router;

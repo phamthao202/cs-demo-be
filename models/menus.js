@@ -4,6 +4,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+    
   },
   pictureUrl: {
     type: String,

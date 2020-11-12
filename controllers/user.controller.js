@@ -104,7 +104,7 @@ userController.getUserRoleIdByEmail = catchAsync(async (req, res, next) => {
 
   const employee = await Employee.findOne({ employeeId: user._id });
 
-  accessToken = await user.generateToken();
+  accessToken = await user.generateToken();//tai sao phai accesstoken
   return sendResponse(
     res,
     200,

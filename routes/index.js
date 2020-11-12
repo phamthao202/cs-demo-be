@@ -19,8 +19,8 @@ const authApi = require("./auth.api");
 router.use("/auth", authApi);
 
 //dailyPayslip
-// const dailyPayslipRouter = require("./dailyPayslip.api");
-// router.use("/payslip", dailyPayslipRouter);
+const dailyPayslipRouter = require("./dailyPayslip.api");
+router.use("/payslip", dailyPayslipRouter);
 // employeeApi
 const employeeApi = require("./employee.api");
 router.use("/employee", employeeApi);

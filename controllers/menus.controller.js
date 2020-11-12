@@ -45,6 +45,30 @@ const getSingleItem = catchAsync(async (req, res, next) => {
   return sendResponse(res, 200, true, singleItem, null, null);
 });
 
+const getMenuByTitle = catchAsync(async (req, res, next) => {
+    const title = req.params.title;
+    //   console.log(email)
+    const menu = await Menu.findOne({ title });
+   console.log("chay den cho nay chua")
+    if (!menu)
+      return next(new AppError(400, "Menu Not Found", "Find Menu Error"));
+  
+    // const targetMenu = await Menu.findOne({ employeeId: user._id });
+  
+    // accessToken = await user.generateToken();//tai sao phai accesstoken
+    return sendResponse(
+      res,
+      200,
+      true,
+      {
+       menu
+      },
+      null,
+      "Get menu successful"
+    );
+  });
+
+
 const updateSingleItem = catchAsync(async (req, res, next) => {
   const itemId = req.params.id;
   const {} = req.body;
@@ -86,7 +110,8 @@ const deleteSingleItem = catchAsync(async (req, res, next) => {
 module.exports = {
   createItem,
   getMenuByCategory,
-  getSingleItem,
+//   getSingleItem,
   updateSingleItem,
   deleteSingleItem,
+  getMenuByTitle
 };
