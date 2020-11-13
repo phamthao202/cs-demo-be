@@ -46,35 +46,34 @@ const getSingleItem = catchAsync(async (req, res, next) => {
 });
 
 const getMenuByTitle = catchAsync(async (req, res, next) => {
-    const title = req.params.title;
-    //   console.log(email)
-    const menu = await Menu.findOne({ title });
-   console.log("chay den cho nay chua")
-    if (!menu)
-      return next(new AppError(400, "Menu Not Found", "Find Menu Error"));
-  
-    // const targetMenu = await Menu.findOne({ employeeId: user._id });
-  
-    // accessToken = await user.generateToken();//tai sao phai accesstoken
-    return sendResponse(
-      res,
-      200,
-      true,
-      {
-       menu
-      },
-      null,
-      "Get menu successful"
-    );
-  });
+  const title = req.params.title;
+  //   console.log(email)
+  const menu = await Menu.findOne({ title });
+  console.log("chay den cho nay chua");
+  if (!menu)
+    return next(new AppError(400, "Menu Not Found", "Find Menu Error"));
 
+  // const targetMenu = await Menu.findOne({ employeeId: user._id });
+
+  // accessToken = await user.generateToken();//tai sao phai accesstoken
+  return sendResponse(
+    res,
+    200,
+    true,
+    {
+      menu,
+    },
+    null,
+    "Get menu successful"
+  );
+});
 
 const updateSingleItem = catchAsync(async (req, res, next) => {
-  const itemId = req.params.id;
+  const targetId = req.params.id;
   const {} = req.body;
 
   const item = await Menu.findOneAndUpdate(
-    { _id: itemId },
+    { _id: targetId },
     { $set: { ...req.body } },
     { new: true }
   );
@@ -90,9 +89,10 @@ const updateSingleItem = catchAsync(async (req, res, next) => {
 });
 
 const deleteSingleItem = catchAsync(async (req, res, next) => {
-  const itemId = req.params.id;
+  const id = req.params.id;
+  console.log(id, " may day roi");
   const item = await Menu.findOneAndUpdate(
-    { _id: itemId },
+    { _id: id },
     { isDeleted: true },
     { new: true }
   );
@@ -110,8 +110,8 @@ const deleteSingleItem = catchAsync(async (req, res, next) => {
 module.exports = {
   createItem,
   getMenuByCategory,
-//   getSingleItem,
+  //   getSingleItem,
   updateSingleItem,
   deleteSingleItem,
-  getMenuByTitle
+  getMenuByTitle,
 };
